@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: redis
-        image: {{ .Value.redis.image }}
+        image: {{ .Values.redis.image }}
         ports:
-        - containerPort: {{ .Value.redis.port }}
+        - containerPort: {{ .Values.redis.port }}
 ---
 apiVersion: v1
 kind: Service
@@ -26,6 +26,6 @@ spec:
   selector:
     app: redis
   ports:
-  - port: {{ .Value.redis.port }}
-    targetPort: {{ .Value.redis.port }} 
+  - port: {{ .Values.redis.port }}
+    targetPort: {{ .Values.redis.port }} 
   type: ClusterIP

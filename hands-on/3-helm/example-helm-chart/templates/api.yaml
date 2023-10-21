@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: python
-        image: {{ .Value.api.image }}
+        image: {{ .Values.api.image }}
         env:
         - name: REDIS_HOST
           value: redis-svc
         - name: REDIS_PORT
-          value: "{{ .Value.redis.port }}"
+          value: "{{ .Values.redis.port }}"
         ports:
-        - containerPort: {{ .Value.api.port }}
+        - containerPort: {{ .Values.api.port }}
       imagePullSecrets:
       - name: user14-secret 
 ---
@@ -33,6 +33,6 @@ spec:
   selector:
     app: python
   ports:
-  - port: {{ .Value.api.port }} 
-    targetPort: {{ .Value.api.port }}
+  - port: {{ .Values.api.port }} 
+    targetPort: {{ .Values.api.port }}
   type: ClusterIP

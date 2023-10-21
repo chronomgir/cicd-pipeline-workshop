@@ -17,7 +17,7 @@ spec:
         image: {{ .Values.nginx.image }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
-          - mountPath: {{ .Value.nginx.path }}
+          - mountPath: {{ .Values.nginx.path }}
             name: nginx-conf
             readOnly: true
       volumes:
@@ -71,13 +71,13 @@ data:
 
         upstream backend {
             # must match the target service name
-            server python-svc:{{ .Value.api.port }};
+            server python-svc:{{ .Values.api.port }};
         }
 
         server {
             listen       80;
             location / {
-                proxy_pass http://python-svc:{{ .Value.api.port }};
+                proxy_pass http://python-svc:{{ .Values.api.port }};
                 
                 proxy_set_header Host $http_host;
                 proxy_redirect ~^http://[^/]*/(.*) http://$http_host/$1;
