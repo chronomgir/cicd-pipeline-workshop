@@ -22,6 +22,11 @@ spec:
           value: "{{ .Values.redis.port }}"
         ports:
         - containerPort: {{ .Values.api.port }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.api.port }}
+          initialDelaySeconds: 15
+          periodSeconds: 10
       imagePullSecrets:
       - name: user14-secret 
 ---
