@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: python
-        image: registry.srcmesh.dev/workshop/user-14:0.0.1
+        image: {{ .Value.api.image }}
         env:
         - name: REDIS_HOST
           value: redis-svc
         - name: REDIS_PORT
-          value: "6379"
+          value: "{{ .Value.redis.port }}"
         ports:
-        - containerPort: 5000
+        - containerPort: {{ .Value.api.port }}
       imagePullSecrets:
       - name: user14-secret 
 ---
@@ -33,6 +33,6 @@ spec:
   selector:
     app: python
   ports:
-  - port: 5000
-    targetPort: 5000
+  - port: {{ .Value.api.port }} 
+    targetPort: {{ .Value.api.port }}
   type: ClusterIP

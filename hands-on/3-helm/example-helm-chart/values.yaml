@@ -1,2 +1,11 @@
 nginx:
   image: nginx:latest
+  path: /etc/nginx/
+
+api:
+  image: registry.srcmesh.dev/workshop/user-14:0.0.1
+  port: 5000
+
+redis:
+  image: redis:latest
+  port: 6379
